@@ -39,12 +39,12 @@ server.post('/projects', logRequest,(req, res) =>{
 });
 
 //listar todos projetos
-server.get('/projects', (req, res) => {
+server.get('/projects', logRequest, (req, res) => {
   return res.json(projects);
 });
 
 //update
-server.put('/projects/:id', checkProjectExists, (req, res) => {
+server.put('/projects/:id', checkProjectExists, logRequest, (req, res) => {
   // Rrecebe o id da posição que sera alterado
   const { id } = req.params;
   // Recebe o novo valor do campo modificado
@@ -62,7 +62,7 @@ server.put('/projects/:id', checkProjectExists, (req, res) => {
 })
 
 
-server.delete("/projects/:id", checkProjectExists, (req, res) => {
+server.delete("/projects/:id", checkProjectExists, logRequest, (req, res) => {
   const { id } = req.params;
   const index = projects.findIndex(project => project.id === id);
 
@@ -71,7 +71,7 @@ server.delete("/projects/:id", checkProjectExists, (req, res) => {
   return res.send();
 });
 
-server.post('/projects/:id/tasks', (req, res) =>{
+server.post('/projects/:id/tasks', logRequest, (req, res) =>{
   const { id } = req.params;
   const { title } = req.body;
 
